@@ -36,11 +36,11 @@ function gz_register_team_member() {
 	endif;
 
 	// Enqueue the script in the editor
-	register_block_type( 'gz/team-member', array(
-		'editor_script' => 'team-member-editor',
-		'editor_style'  => 'team-member-editor',
-		'style'         => 'team-member',
-		'script'        => 'team-member',
+	register_block_type( 'gzblocks/team-member', array(
+		'editor_script' => 'gz-team-member-editor',
+		'editor_style'  => 'gz-team-member-editor',
+		'style'         => 'gz-team-member',
+		'script'        => 'gz-team-member',
 	) );
 }
 

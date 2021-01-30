@@ -13,7 +13,7 @@ module.exports = (env, argv) => {
 
   var config = {
     entry: {
-      editor: './src/editor.js',
+      editor: './src/index.js',
       script: './src/script.js',
     },
     output: {

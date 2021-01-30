@@ -1,63 +1,42 @@
-import { Component, Fragment } from '@wordpress/element'
+import { Component } from '@wordpress/element'
+import { RichText } from '@wordpress/editor'
 import { __ } from '@wordpress/i18n'
-import { seeMoreChekcHeight, buttonToggle } from './script'
 
-import {
-  InnerBlocks,
-  InspectorControls
-} from '@wordpress/block-editor'
+class TeamMemberEdit extends Component {
 
-import {
-  PanelBody,
-  RangeControl,
-} from '@wordpress/components'
-
-class Edit extends Component {
-
-  updateRangeControl = (maxHeight) => {
-    this.props.setAttributes({ maxHeight })
-    seeMoreChekcHeight()
-    buttonToggle()
+  onChangeTitle = (title) => {
+    this.props.setAttributes({ title })
   }
 
-  onChangeInner () {
-    seeMoreChekcHeight()
-    buttonToggle()
+  onChangeInfo = (info) => {
+    this.props.setAttributes({ info })
   }
 
   render () {
     const { className, attributes } = this.props
-    const { maxHeight } = attributes
-    return (
-      <Fragment>
-        <InspectorControls>
-          <PanelBody title={__('Settings')} initialOpen={true}>
-            <RangeControl
-              label={__('Content max height', 'ust-blocks')}
-              value={maxHeight}
-              onChange={this.updateRangeControl}
-              min={100}
-              max={999}
-            />
-          </PanelBody>
-        </InspectorControls>
+    const { title, info } = attributes
 
-        <div className={className}>
-          <div className="seemore">
-            <div className="max-height" style={{ maxHeight: maxHeight }}>
-              <div className="full-text">
-                <InnerBlocks
-                  onChange={this.onChangeInner()}
-                />
-              </div>
-            </div>
-            <div className="btn-more"></div>
-          </div>
+    return (
+        <div className={ className }>
+          <RichText
+            className={'wp-block-gzblocks-team-member__title'}
+            tagName="h4"
+            onChange={this.onChangeTitle}
+            value={title}
+            placeholder={__('Member Name', 'gzblocks')}
+            formattingControls={[]}
+          />
+          <RichText
+            className={'wp-block-gzblocks-team-member__info'}
+            tagName="p"
+            onChange={this.onChangeInfo}
+            value={info}
+            placeholder={__('Member Info', 'gzblocks')}
+            formattingControls={[]}
+          />
         </div>
-      </Fragment>
     )
   }
 }
 
-export default Edit
-
+export default TeamMemberEdit;
