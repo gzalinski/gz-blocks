@@ -3,6 +3,7 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
+//const CopyPlugin = require("copy-webpack-plugin");
 var path = require('path');
 const glob = require("glob");
 
@@ -38,6 +39,12 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new CleanPlugin(),
+      // new CopyPlugin({
+      //   patterns: [
+      //     { from: "./src/prismjs/grammars", to: "./prismjs/grammars" },
+      //     { from: "./src/prismjs/themes", to: "./prismjs/themes" },
+      //   ],
+      // }),
       new MiniCSSExtractPlugin({
         chunkFilename: '[id].css',
         filename: chunkData => {
