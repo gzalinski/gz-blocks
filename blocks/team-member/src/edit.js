@@ -1,6 +1,23 @@
-import { Component } from '@wordpress/element'
-import { RichText } from '@wordpress/editor'
+import { Component, Fragment } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
+import { isBlobURL } from '@wordpress/blob'
+
+import { RichText } from '@wordpress/editor'
+
+import {
+  MediaPlaceholder,
+  MediaUpload,
+  MediaUploadCheck,
+  InspectorControls
+} from '@wordpress/block-editor'
+
+import {
+  Spinner,
+  IconButton,
+  PanelBody,
+  TextareaControl,
+  SelectControl,
+} from '@wordpress/components'
 
 class TeamMemberEdit extends Component {
 
@@ -12,12 +29,151 @@ class TeamMemberEdit extends Component {
     this.props.setAttributes({ info })
   }
 
+  onChangeEmail = (email) => {
+    this.props.setAttributes({ email })
+  }
+
+  onSelectImage = ({ id, url, alt }) => {
+    this.props.setAttributes({
+      id, url, alt,
+    })
+  }
+
+  onSelectURL = (url) => {
+    this.props.setAttributes({
+      url,
+      id: null,
+      alt: '',
+    })
+  }
+
+  onUploadError = (message) => {
+    const { noticeOperations } = this.props
+    noticeOperations.createErrorNotice(message)
+  }
+
+  componentDidMount () {
+    const { attributes, setAttributes } = this.props
+    const { url, id } = attributes
+    if (url && isBlobURL(url) && !id) {
+      setAttributes({
+        url: '',
+        alt: '',
+      })
+    }
+  }
+
+  removeImage = () => {
+    this.props.setAttributes({
+      id: null,
+      url: '',
+      alt: '',
+    })
+  }
+  updateAlt = (alt) => {
+    this.props.setAttributes({ alt })
+  }
+
+  onImageSizeChange = (url) => {
+    this.props.setAttributes({ url })
+  }
+
+  getImageSizes () {
+    const { image, imageSizes } = this.props
+    if (!image) return []
+    let options = []
+    const sizes = image.media_details.sizes
+
+    for (const key in sizes) {
+      const size = sizes[key]
+      const imageSize = imageSizes.find(size => size.slug === key)
+      if (imageSize) {
+        options.push({
+          label: imageSize.name,
+          value: size.source_url,
+        })
+      }
+    }
+    return options
+  }
+
   render () {
-    const { className, attributes } = this.props
-    const { title, info } = attributes
+    const { className, attributes, noticeUI } = this.props
+    const { title, info, email, alt, url, id, } = attributes
 
     return (
+      <Fragment>
+
+        <InspectorControls>
+          <PanelBody title={__('Settings')} initialOpen={true}>
+
+            {url && !isBlobURL(url) &&
+            <TextareaControl
+              label={__('Image Alt', 'ust-blocks')}
+              value={alt}
+              onChange={this.updateAlt}
+            />
+            }
+            {id &&
+            <SelectControl
+              label={__('Image Size', 'ust-blocks')}
+              options={this.getImageSizes()}
+              onChange={this.onImageSizeChange}
+            />
+            }
+          </PanelBody>
+        </InspectorControls>
+
         <div className={ className }>
+          <div className="wp-block-ust-member__image">
+            {url ?
+              <Fragment>
+                <img src={url} alt={alt}/>
+                {isBlobURL(url) && <Spinner/>}
+              </Fragment>
+              : <MediaPlaceholder
+                icon="format-image"
+                onSelect={this.onSelectImage}
+                onSelectURL={this.onSelectURL}
+                onError={this.onUploadError}
+                accept="image/*"
+                allowedTypes={['image']}
+                notices={noticeUI}
+              />
+            }
+
+            {url &&
+            <Fragment>
+              <IconButton
+                className='components-icon-button components-toolbar__control'
+                label={__('Remove Image', 'ust-blocks')}
+                onClick={this.removeImage}
+                icon={'trash'}
+              />
+
+              {id &&
+              <MediaUploadCheck>
+                <MediaUpload
+                  onSelect={this.onSelectImage}
+                  alowedTypes={['image']}
+                  value={id}
+                  render={({ open }) => {
+                    return (
+                      <IconButton
+                        className='components-icon-button components-toolbar__control'
+                        label={__('Edit Image', 'ust-blocks')}
+                        onClick={open}
+                        icon={'edit'}
+                      />
+                    )
+                  }}
+                />
+              </MediaUploadCheck>
+              }
+            </Fragment>
+            }
+          </div>
+
           <RichText
             className={'wp-block-gzblocks-team-member__title'}
             tagName="h4"
@@ -35,6 +191,7 @@ class TeamMemberEdit extends Component {
             formattingControls={[]}
           />
         </div>
+      </Fragment>
     )
   }
 }
