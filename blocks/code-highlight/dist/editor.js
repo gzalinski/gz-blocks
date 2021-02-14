@@ -295,7 +295,6 @@ var Edit = /*#__PURE__*/function (_Component) {
         unstableOnSplit: function unstableOnSplit() {
           return false;
         },
-        formattingControls: [],
         __self: this,
         __source: {
           fileName: _jsxFileName,

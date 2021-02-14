@@ -2782,15 +2782,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
 Prism.plugins.autoloader.languages_path = path_prismjs;
 Prism.hooks.add('before-highlight', function (env) {
   env.element.innerHTML = env.element.innerHTML.replace(/<br\s*\/?>/g, '\n');

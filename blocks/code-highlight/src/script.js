@@ -23,7 +23,7 @@ import './prismjs/plugins/copy-to-clipboard/copy-to-clipboard'
 
 Prism.plugins.autoloader.languages_path = path_prismjs
 
-Prism.hooks.add('before-highlight', function (env) {
-  env.element.innerHTML = env.element.innerHTML.replace(/<br\s*\/?>/g, '\n')
-  env.code = env.element.textContent.replace(/^(?:\r?\n|\r)/, '')
-})
+Prism.hooks.add('before-highlight', function(env) {
+  env.element.innerHTML = env.element.innerHTML.replace(/<br\s*\/?>/g,'\n');
+  env.code = env.element.textContent.replace(/^(?:\r?\n|\r)/,'');
+});

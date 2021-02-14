@@ -95,7 +95,6 @@ class Edit extends Component {
               value={code}
               placeholder={__('Code')}
               unstableOnSplit={ () => false }
-             formattingControls={[]}
             />
           </pre>
         </div>
