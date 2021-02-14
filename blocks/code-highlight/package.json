@@ -2,7 +2,7 @@
   "name": "ensp-blocks",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/editor.js",
   "scripts": {
     "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production"

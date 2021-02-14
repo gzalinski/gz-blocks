@@ -36,7 +36,7 @@ registerBlockType('docode/code-highlight', {
     'gocode',
   ],
   attributes,
-  edit: Edit,
+  //edit: Edit,
   save: function ({ attributes }) {
     const { line_num, language, code } = attributes
 

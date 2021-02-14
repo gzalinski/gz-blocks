@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/editor.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -312,10 +312,10 @@ var Edit = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/editor.js":
-/*!***********************!*\
-  !*** ./src/editor.js ***!
-  \***********************/
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -330,7 +330,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_4__);
-var _jsxFileName = "/Users/mac/Sites/gocode/app/public/wp-content/plugins/gz-blocks/blocks/code-highlight/src/editor.js";
+var _jsxFileName = "/Users/mac/Sites/gocode/app/public/wp-content/plugins/gz-blocks/blocks/code-highlight/src/index.js";
 
 
 
@@ -360,7 +360,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('doc
   },
   keywords: ['code', 'prismjs', 'pre', 'gocode'],
   attributes: attributes,
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
+  //edit: Edit,
   save: function save(_ref) {
     var attributes = _ref.attributes;
     var line_num = attributes.line_num,
