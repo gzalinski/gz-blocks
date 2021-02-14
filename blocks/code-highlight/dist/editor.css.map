@@ -1,0 +1,1 @@
+{"version":3,"file":"editor.css","sources":["webpack:///./src/style.editor.scss"],"sourcesContent":[".wp-block-docode-code-highlight {\n  max-height: 600px;\n  overflow-y: auto; }\n"],"mappings":"AAAA;AACA;AACA;;","sourceRoot":""}
